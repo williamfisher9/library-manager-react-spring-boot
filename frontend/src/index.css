@@ -1,0 +1,15 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url("./assets/wallpaper2.jpg");
+  background-repeat: repeat;
+}
+
+.app-container {
+  width: 100svw;
+  height: 100svh;
+}
