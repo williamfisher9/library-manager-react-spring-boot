@@ -1,3 +1,6 @@
+- npm create vite@latest frontend
+- npm install react-router-dom
+
 # A web applciation to store movies and series records in a database.
 - Built using Angular v18 and Java Spring Boot.
 - HTTP Basic Authentication using Spring Security.
