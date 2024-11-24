@@ -1,6 +1,21 @@
 .home-container {
-    position: relative;
     width: 100%;
     height: 100%;
-    border: 1px solid red;
+    padding-left: 65px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#home-title {
+    font-size: 4rem;
+    -webkit-text-stroke-color: rgb(209, 174, 104);
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 4px 4px 8px rgb(164, 113, 12), 
+    4px 4px 16px rgb(209, 174, 104), 
+    4px 4px 12px rgb(113, 209, 104), 
+    4px 4px 20px rgb(111, 104, 209);
 }
