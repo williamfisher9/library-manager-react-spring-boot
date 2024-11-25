@@ -75,7 +75,6 @@ public class AppController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/public/get-menu")
     public ResponseEntity<ResponseDTO> getPublicMenu(){
-        System.out.println("request");
         ResponseDTO responseDTO = new ResponseDTO();
         responseDTO.setStatus(200);
         responseDTO.setResponse(authService.getMenu("public"));
