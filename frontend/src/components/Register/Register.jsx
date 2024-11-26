@@ -56,7 +56,6 @@ export default function Register() {
         setFormValidation({firstName: firstNameInvalid, lastName: lastNameInvalid, emailAddress: emailAddressInvalid, password: passwordInvalid});
 
         if(!firstNameInvalid && !lastNameInvalid && !emailAddressInvalid && !passwordInvalid) {
-            console.log(firstName, lastName, emailAddress, password)
             sendRegisterRequest(firstName, lastName, emailAddress, password).then(() => {navigate('/login')})
             .catch(err => setResponseError({error: true, message: err.response.data.error}));
         }

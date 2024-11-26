@@ -1,10 +1,13 @@
 import { useState } from 'react'
 import './Login.css'
 import { sendLoginRequest } from '../../services/AppServices';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login(){
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('hamza.hamdan@hotmail.com');
+    const [password, setPassword] = useState('12345678');
+
+    const navigate = useNavigate();
 
     const [formValidation, setFormValidation] = useState({username: false, password: false});
 
@@ -33,7 +36,13 @@ export default function Login(){
         setFormValidation({username: usernameInvalid, password: passwordInvalid});
 
         if(!usernameInvalid && !passwordInvalid) {
-            sendLoginRequest(username, password).then((res) => console.log(res))
+            sendLoginRequest(username, password).then((res) => {
+                window.localStorage.setItem('userId', res.data.response.principal.id);
+                window.localStorage.setItem('username', res.data.response.principal.username);
+                window.localStorage.setItem('password', password);
+                setResponseError({error: false, message: ''});
+                navigate('/user-home');
+            })
             .catch(err => setResponseError({error: true, message: err.response.data.error}));
         }
     }

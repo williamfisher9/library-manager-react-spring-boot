@@ -10,11 +10,8 @@ export default function Menu({location}){
     const [menuItems, setMenuItems] = useState([]);
 
     useEffect(() => {
-        console.log(location);
         if(location == '/'){
             getMenuItems().then(res => setMenuItems(res.data.response));
-        } else {
-            console.log("none")
         }
     }, []);
 
