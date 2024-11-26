@@ -59,6 +59,8 @@
 .icon {
     font-size: 1.4rem;
     color: #fff;
+    cursor: pointer;
+    padding: 5px;
 }
 
 select {
@@ -86,5 +88,12 @@ select {
     width: 210;
     height: 300px;
     border: 2px solid rgb(209, 174, 104);
+    border-radius: 5px;
+}
+
+.highlight-icon {
+    color: black;
+    background-color: rgba(218, 165, 32, 0.8);
+    padding: 5px;
     border-radius: 5px;
 }
