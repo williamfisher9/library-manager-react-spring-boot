@@ -13,8 +13,9 @@ export const sendLoginRequest = (username, password) => {
 }
 
 export const sendUserHomeRequest = (id, username, password) => {
-   console.log(id);
-   console.log(username);
-   console.log(password);
    return axios.post("http://localhost:9999/api/v1/user/home", {userId: id}, {headers: {"Authorization": `Basic ${btoa(username + ':' + password)}`}});
+}
+
+export const searchItemByName = (name, username, password, userId) => {
+   return axios.get(`http://localhost:9999/api/v1/user/${userId}/search/${name == "" ? "nill" : name}`, {headers: {"Authorization": `Basic ${btoa(username + ':' + password)}`}})
 }

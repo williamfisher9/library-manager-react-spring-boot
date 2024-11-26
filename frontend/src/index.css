@@ -9,4 +9,5 @@
 body {
   font-family: 'Poppins', sans-serif;
   background: url("./assets/wallpaper3.jpg") center/cover no-repeat;
+  background-attachment: fixed;
 }
