@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+
+
 import {
+  deleteItemById,
     filterItemsBy,
+  flipWatched,
   searchItemByName,
   sendUserHomeRequest,
 } from "../../../services/AppServices";
 import "./UserHome.css";
+import { Outlet, useNavigate } from "react-router";
 
 export default function UserHome() {
   const navigate = useNavigate();
@@ -153,8 +157,40 @@ export default function UserHome() {
     sortItemsByTypeAndDirection(undefined, !userHomeObj.ascSortDirection);
   };
 
+  const deleteItem = (id) => {
+    deleteItemById(id, window.localStorage.getItem("username"),
+    window.localStorage.getItem("password"),
+    window.localStorage.getItem("userId"))
+    .then((res) => setUserHomeObj({...userHomeObj, items: res.data.response}));
+  }
+
+  const flipItemWatched = (item) => {
+    flipWatched(window.localStorage.getItem("userId"),
+    window.localStorage.getItem("username"),
+    window.localStorage.getItem("password"),
+    !item.watched,
+    item.id
+  ).then(res => {
+    if(res.data.status == 200) {
+      sendUserHomeRequest(
+        window.localStorage.getItem("userId"),
+        window.localStorage.getItem("username"),
+        window.localStorage.getItem("password")
+      ).then((res) => {
+        setUserHomeObj({...userHomeObj, items: res.data.response});
+      });
+    }
+  })
+  }
+
+  const getItemDetails = (id) => {
+    navigate(`/user-home/${id}`)
+  }
+
   return (
+    
     <div className="user-home-container">
+      <Outlet />
       <div className="top-tool-bar">
         <div className="search-control-container">
           <input
@@ -205,6 +241,32 @@ export default function UserHome() {
                 width="100%"
                 height="100%"
               />
+
+            <div className="icons-container">
+            {
+              item.watched ? <i className="item-icons-bar-icon fa-regular fa-eye"></i> : <i className="item-icons-bar-icon fa-regular fa-eye-slash"></i> 
+            }
+
+            {
+              item.type == 'series' ? <i className="item-icons-bar-icon fa-solid fa-tv"></i> : <i className="item-icons-bar-icon fa-solid fa-video"></i>
+            }
+              </div>
+    
+              <div className="item-cover">
+                <p>{item.name}</p>
+                <p>{item.year}</p>
+                <p>{item.rating}</p>
+                <div className="item-actions-bar">
+                    <i className="bar-icon fa-solid fa-trash" onClick={() => deleteItem(item.id)}></i>
+                    <i className="bar-icon fa-solid fa-circle-info" onClick={() => getItemDetails(item.id)}></i>
+
+                    <i className={item.watched ? "bar-icon fa-regular fa-eye" : "bar-icon fa-regular fa-eye-slash"}  onClick={() => flipItemWatched(item)}></i> 
+
+                </div>
+              </div>
+
+
+
             </div>
           );
         })}
@@ -212,3 +274,5 @@ export default function UserHome() {
     </div>
   );
 }
+
+

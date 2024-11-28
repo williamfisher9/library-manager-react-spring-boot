@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './Register.css';
 import { sendRegisterRequest } from '../../services/AppServices';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export default function Register() {
     const navigate = useNavigate();
@@ -31,7 +31,8 @@ export default function Register() {
         setPassword(event.target.value)
     }
 
-    const handleRegisterRequest = () => {
+    const handleRegisterRequest = (event) => {
+        event.preventDefault();
         let firstNameInvalid = false;
         let lastNameInvalid = false;
         let emailAddressInvalid = false;
@@ -63,7 +64,7 @@ export default function Register() {
 
   return (
     <div className="register-container">
-       <div className="form-fields">
+       <form className="form-fields">
        <div className="form-control-field">
                 <input className='form-control-field-input' type='text' id='firstName' name='firstName' autoComplete='off' onChange={handleFirstNameChange}/>
                 <label className='form-control-field-label' id='firstNameLabel'>first name</label>
@@ -102,7 +103,7 @@ export default function Register() {
             {
                     responseError.error ? <label className='request-error' id='requestError'>{responseError.message}</label> : null
                 }
-         </div>
+         </form>
     </div>
   );
 }

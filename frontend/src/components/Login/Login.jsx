@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './Login.css'
 import { sendLoginRequest } from '../../services/AppServices';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export default function Login(){
     const [username, setUsername] = useState('hamza.hamdan@hotmail.com');
@@ -21,7 +21,8 @@ export default function Login(){
         setPassword(event.target.value)
     }
 
-    const handleLoginRequest = () => {
+    const handleLoginRequest = (event) => {
+        event.preventDefault();
         let usernameInvalid = false;
         let passwordInvalid = false;
 
@@ -48,7 +49,7 @@ export default function Login(){
     }
  
     return <div className="login-container">
-         <div className="form-fields">
+         <form className="form-fields">
             <div className="form-control-field">
                 <input className='form-control-field-input' type='text' id='username' name='username' autoComplete='off' onChange={handleUsernameChange}/>
                 <label className='form-control-field-label' id='usernameLabel'>username</label>
@@ -72,6 +73,6 @@ export default function Login(){
             {
                     responseError.error ? <label className='request-error' id='requestError'>{responseError.message}</label> : null
                 }
-         </div>
+         </form>
     </div>
 }

@@ -1,5 +1,5 @@
+import { Outlet, useLocation } from "react-router";
 import './App.css'
-import { Outlet, useLocation } from 'react-router-dom';
 import Menu from './Menu/Menu';
 
 export default function App(){
