@@ -1,7 +1,4 @@
-- npm create vite@latest frontend
-- npm install react-router-dom
-
-# Movies library management app using ReactJS and Java with Spring Security and Spring Boot.
+# Movies library management app using ReactJS and Java with Spring Security and Spring Boot
 - REST API web applciation.
 - Built using ReactJS and Java Spring Boot with Spring Security.
 - HTTP Basic Authentication using Spring Security.
@@ -25,3 +22,7 @@
 - Maven
 - NPM
 - MySQL DB
+
+## Packages:
+- npm create vite@latest frontend
+- npm install react-router-dom
