@@ -10,7 +10,8 @@ export default function NewItemModal(){
         navigate('/user-home');
     }
 
-    const [formFields, setFormFields] = useState({name: '', year: ''});
+    const [formFields, setFormFields] = useState({name: '', year: '', movieItem: null, searchError: '', nameError: ''});
+
 
     const handleFieldChange = (event) => {
         if(event.target.name == "name"){
@@ -22,16 +23,26 @@ export default function NewItemModal(){
         }
     }
 
-    const [movieItem, setMovieItem] = useState();
-
     const searchForItem = () => {
+        if(formFields.name == ''){
+            setFormFields({...formFields, nameError: 'Name field is required', searchError: '', movieItem: null})
+            return;
+        } 
+
         getMovieItemDetailsFromAPI(formFields.name, formFields.year, window.localStorage.getItem('username'), window.localStorage.getItem('password'))
-        .then(res => setMovieItem(JSON.parse(res.data.response)))
+        .then(res => {
+            if(JSON.parse(res.data.response).Response == "True"){
+            setFormFields({...formFields, movieItem: JSON.parse(res.data.response), nameError: ''})
+            } else {
+                setFormFields({...formFields, movieItem: null, searchError: JSON.parse(res.data.response).Error, nameError: ''})
+            }
+        })
+        
     }
 
 
     const storeMovieItemRecord = () => {
-        cretaeMovieItem(window.localStorage.getItem('userId'), window.localStorage.getItem('username'), window.localStorage.getItem('password'), movieItem)
+        cretaeMovieItem(window.localStorage.getItem('userId'), window.localStorage.getItem('username'), window.localStorage.getItem('password'), formFields.movieItem)
         .then((res) => {
             if(res.data.status == 200){
                 navigate('/user-home');
@@ -47,7 +58,7 @@ export default function NewItemModal(){
                 <div className="form-field-group">
                     <input className="form-field-input" type="text" name="name" id="name" autoComplete="off" onChange={handleFieldChange} />
                     <label htmlFor="name" className="form-field-label">name</label>
-                    <p className="error-msg">error</p>
+                    <p className="error-msg">{formFields.nameError}</p>
                 </div>
     
                 <div className="form-field-group">
@@ -59,16 +70,16 @@ export default function NewItemModal(){
                     <input className="btn-caption" type="button" value="search" onClick={searchForItem}/>
                 </div>
     
-                <p className="request-error-msg">request error</p>
+                <p className="request-error-msg">{formFields.searchError}</p>
                 </div>
     
                 {
-                movieItem != null ? 
+                formFields.movieItem != null ? 
                 <div className="movie-item-container">
-                    <img width="125px" height="175px" src={movieItem.Poster} alt='API Image' />
+                    <img width="125px" height="175px" src={formFields.movieItem.Poster} alt='API Image' />
                     <div className="movie-details">
-                        <p>Title: {movieItem.Title}</p>
-                        <p>Year: {movieItem.Year}</p>
+                        <p>Title: {formFields.movieItem.Title}</p>
+                        <p>Year: {formFields.movieItem.Year}</p>
                         <input type="button" value="ADD TO LIBRARY" id="add-btn" onClick={storeMovieItemRecord} />
                     </div>
                 </div>

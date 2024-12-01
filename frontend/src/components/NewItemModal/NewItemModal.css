@@ -43,6 +43,13 @@
     border-radius: 5px;
 }
 
+.error-msg {
+    position: absolute;
+    background-color: transparent;
+    color: red;
+    bottom: -27px;
+}
+
 .form-field-input {
     position: absolute;
     background-color: transparent;
@@ -110,4 +117,8 @@
     background-color: rgb(209, 174, 104);
     color: #000;
     cursor: pointer;
+}
+
+.request-error-msg {
+    color: red;
 }
