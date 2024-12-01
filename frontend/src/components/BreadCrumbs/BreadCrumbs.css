@@ -1,0 +1,19 @@
+.bread-crumbs-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 5px;
+}
+.bread-crumbs-item{
+    color: goldenrod;
+    font-size: 1.3rem;
+}
+
+.bread-crumb-icon {
+    color: goldenrod;
+}

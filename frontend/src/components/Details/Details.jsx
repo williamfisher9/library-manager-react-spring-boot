@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./Details.css";
 import { useParams } from "react-router";
 import { flipWatched, getItemById } from "../../services/AppServices";
+import BreadCrumbs from "../BreadCrumbs/BreadCrumbs";
 
 export default function Details() {
   const params = useParams();
@@ -33,6 +34,7 @@ export default function Details() {
 
   return (
     <div className="item-container">
+      <BreadCrumbs item={itemDetails.item.Title}/>
       <div className="main-container">
         <div className="poster-container">
           <img src={itemDetails.item.Poster} width="100%" height="100%" />
