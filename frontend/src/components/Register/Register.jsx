@@ -6,10 +6,10 @@ import { useNavigate } from 'react-router';
 export default function Register() {
     const navigate = useNavigate();
 
-    const [firstName, setFirstName] = useState('HamzaMahm');
-    const [lastName, setLastName] = useState('HamzaHamdan');
-    const [emailAddress, setEmailAddress] = useState('hamza.hamdan2@hotmail.com');
-    const [password, setPassword] = useState('123456789');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [emailAddress, setEmailAddress] = useState('');
+    const [password, setPassword] = useState('');
 
     const [formValidation, setFormValidation] = useState({firstName: false, lastName: false, emailAddress: false, password: false});
 

@@ -145,7 +145,7 @@ export default function UserHome() {
       window.localStorage.getItem("password"),
       window.localStorage.getItem("userId")
     ).then((res) => {
-        setUserHomeObj({...userHomeObj, items: res.data.response});
+        setUserHomeObj({...userHomeObj, items: res.data.response, seriesIconActive: false, watchedIconActive: false, moviesIconActive: false, ascSortDirection: true, sortBy: 1});
     });
   };
 
